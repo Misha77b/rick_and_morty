@@ -1,6 +1,6 @@
-import { BrowserRouter } from 'react-router-dom';
-import RootRoutes from '../Router/RootRoutes';
-import './app.scss';
+import { BrowserRouter } from "react-router-dom";
+import RootRoutes from "../Router/RootRoutes";
+import "./app.scss";
 
 function App() {
   return (
