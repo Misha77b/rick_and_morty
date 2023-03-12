@@ -1,102 +1,15 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Card.scss";
 
-const Card = () => {
+const Card = ({ image, name, species }) => {
   return (
     <>
       <div className="card">
-        <img
-          className="card__img"
-          src="./assets/rick.png"
-          alt="character img"
-        />
+        <img className="card__img" src={image} alt="character img" />
         <div className="card-text-content">
-          <span className="card-text-content__title">Rick Sanchez</span> <br />
-          <span className="card-text-content__subtitle">Human</span>
-        </div>
-      </div>
-
-      <div className="card">
-        <img
-          className="card__img"
-          src="./assets/rick.png"
-          alt="character img"
-        />
-        <div className="card-text-content">
-          <span className="card-text-content__title">Rick Sanchez</span> <br />
-          <span className="card-text-content__subtitle">Human</span>
-        </div>
-      </div>
-
-      <div className="card">
-        <img
-          className="card__img"
-          src="./assets/rick.png"
-          alt="character img"
-        />
-        <div className="card-text-content">
-          <span className="card-text-content__title">Rick Sanchez</span> <br />
-          <span className="card-text-content__subtitle">Human</span>
-        </div>
-      </div>
-
-      <div className="card">
-        <img
-          className="card__img"
-          src="./assets/rick.png"
-          alt="character img"
-        />
-        <div className="card-text-content">
-          <span className="card-text-content__title">Rick Sanchez</span> <br />
-          <span className="card-text-content__subtitle">Human</span>
-        </div>
-      </div>
-
-      <div className="card">
-        <img
-          className="card__img"
-          src="./assets/rick.png"
-          alt="character img"
-        />
-        <div className="card-text-content">
-          <span className="card-text-content__title">Rick Sanchez</span> <br />
-          <span className="card-text-content__subtitle">Human</span>
-        </div>
-      </div>
-
-      <div className="card">
-        <img
-          className="card__img"
-          src="./assets/rick.png"
-          alt="character img"
-        />
-        <div className="card-text-content">
-          <span className="card-text-content__title">Rick Sanchez</span> <br />
-          <span className="card-text-content__subtitle">Human</span>
-        </div>
-      </div>
-
-      <div className="card">
-        <img
-          className="card__img"
-          src="./assets/rick.png"
-          alt="character img"
-        />
-        <div className="card-text-content">
-          <span className="card-text-content__title">Rick Sanchez</span> <br />
-          <span className="card-text-content__subtitle">Human</span>
-        </div>
-      </div>
-
-      <div className="card">
-        <img
-          className="card__img"
-          src="./assets/rick.png"
-          alt="character img"
-        />
-        <div className="card-text-content">
-          <span className="card-text-content__title">Rick Sanchez</span> <br />
-          <span className="card-text-content__subtitle">Human</span>
+          <span className="card-text-content__title">{name}</span> <br />
+          <span className="card-text-content__subtitle">{species}</span>
         </div>
       </div>
     </>
@@ -104,3 +17,9 @@ const Card = () => {
 };
 
 export default Card;
+
+Card.propTypes = {
+  image: PropTypes.string,
+  name: PropTypes.string,
+  species: PropTypes.string,
+};
