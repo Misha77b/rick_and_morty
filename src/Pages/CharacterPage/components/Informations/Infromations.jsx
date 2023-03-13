@@ -9,7 +9,7 @@ const Infromations = ({ gender, status, specie, origin, type}) => {
       <InformationBlocks title="Gender" descrtiption={gender} />
       <InformationBlocks title="Status" descrtiption={status} />
       <InformationBlocks title="Specie" descrtiption={specie} />
-      {/* <InformationBlocks title="Origin" descrtiption={origin} /> */}
+      <InformationBlocks title="Origin" descrtiption={origin} />
       <InformationBlocks title="Type" descrtiption={type} />
     </div>
   )

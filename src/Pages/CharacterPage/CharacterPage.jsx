@@ -9,7 +9,9 @@ const CharacterPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const singleCharacterData = useSelector((state) => state.singleCharacteReducer.singleCharacterData);
+  const characterOrigin = useSelector((state) => state.singleCharacteReducer.characterOrigin);
   console.log(singleCharacterData);
+  console.log(characterOrigin);
 
   useEffect(() => {
     dispatch(fetchSingleCharacter(id));
@@ -26,7 +28,7 @@ const CharacterPage = () => {
         gender={singleCharacterData.gender} 
         status={singleCharacterData.status} 
         specie={singleCharacterData.specie} 
-        origin={singleCharacterData.origin} 
+        origin={characterOrigin.name} 
         type={singleCharacterData.type} 
       />
     </div>

@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-    singleCharacterData: {},
+  singleCharacterData: {},
+  characterOrigin: {}
 };
 export const fetchSingleCharacter = createAsyncThunk(
   "singleCharacter/fetchData",
@@ -29,6 +30,7 @@ export const singleCharacterSlice = createSlice({
     });
     builder.addCase(fetchSingleCharacter.fulfilled, (state, action) => {
       state.singleCharacterData = action.payload;
+      state.characterOrigin = action.payload.origin;
       state.loader = false;
     });
   },
