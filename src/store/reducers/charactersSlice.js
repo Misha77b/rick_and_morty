@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
   charactersInfo: {},
   charactersResults: [],
+  loader: true,
 };
 
 export const fetchCharacters = createAsyncThunk(

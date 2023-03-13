@@ -9,7 +9,7 @@ const RootRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Characters />} />
-      <Route path="/character:id" element={<CharacterPage />} />
+      <Route path="/character/:id" element={<CharacterPage />} />
       <Route path="/location" element={<Location />} />
       <Route path="/episodes" element={<Episodes />} />
     </Routes>

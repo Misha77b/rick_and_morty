@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLocations } from "../../components/store/reducers/locationSlice";
+import { fetchLocations } from "../../store/reducers/locationSlice";
 import "./Location.scss";
 
 const Location = () => {

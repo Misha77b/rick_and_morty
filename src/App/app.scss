@@ -1,7 +1,14 @@
-.app {
-	max-width: 1020px;
-	margin: 0 auto;
+.app{
     display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+}
+
+.pages {
+	max-width: 1020px;
+	margin: 0 auto;
+}
+
+a {
+	text-decoration: none;
 }

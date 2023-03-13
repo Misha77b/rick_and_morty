@@ -1,7 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
-import Header from "../components/Header/Header";
-import Search from "../components/Search/Search";
 import RootRoutes from "../Router/RootRoutes";
+import Header from "../components/Header/Header"
 import "./app.scss";
 
 function App() {
@@ -9,8 +8,9 @@ function App() {
     <BrowserRouter>
       <div className="app">
         <Header />
-        <Search />
-        <RootRoutes />
+        <div className="pages">
+          <RootRoutes />
+        </div>
       </div>
     </BrowserRouter>
   );

@@ -1,24 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import "./Card.scss";
 
-const Card = ({ image, name, species }) => {
+const Card = ({ id, image, name, species }) => {
   return (
-    <>
-      <div className="card">
+    <Link to={`/character/${id}`}>
+      <div className="card" key={id}>
         <img className="card__img" src={image} alt="character img" />
         <div className="card-text-content">
           <span className="card-text-content__title">{name}</span> <br />
           <span className="card-text-content__subtitle">{species}</span>
         </div>
       </div>
-    </>
+    </Link>
   );
 };
 
 export default Card;
 
 Card.propTypes = {
+  id: PropTypes.number,
   image: PropTypes.string,
   name: PropTypes.string,
   species: PropTypes.string,
