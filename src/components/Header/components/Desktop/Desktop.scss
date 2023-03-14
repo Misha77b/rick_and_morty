@@ -1,0 +1,21 @@
+.nav-box {
+  display: flex;
+  gap: 10px;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
+  &__btn {
+    color: white;
+    padding: 10px;
+    border-bottom: 2px solid transparent;
+  }
+  &__btn:hover {
+    background-color: #011c22;
+    border-radius: 20px;
+  }
+  &__btn-active {
+    color: white;
+    padding: 10px;
+    border-bottom: 2px solid white;
+  }
+}

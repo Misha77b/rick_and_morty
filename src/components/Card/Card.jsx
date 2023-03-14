@@ -6,7 +6,7 @@ import "./Card.scss";
 const Card = ({ id, image, name, species }) => {
   return (
     <Link to={`/character/${id}`}>
-      <div className="card" key={id}>
+      <div className="card">
         <img className="card__img" src={image} alt="character img" />
         <div className="card-text-content">
           <span className="card-text-content__title">{name}</span> <br />
