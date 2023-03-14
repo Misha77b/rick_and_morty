@@ -9,8 +9,12 @@ import { fetchCharacters } from "../../store/reducers/charactersSlice";
 
 const Characters = () => {
   const dispatch = useDispatch();
-  const charactersInfo = useSelector((state) => state.charactersReducer.charactersInfo);
-  const charactersResults = useSelector((state) => state.charactersReducer.charactersResults);
+  const charactersInfo = useSelector(
+    (state) => state.charactersReducer.charactersInfo
+  );
+  const charactersResults = useSelector(
+    (state) => state.charactersReducer.charactersResults
+  );
 
   console.log(charactersInfo);
   console.log(charactersResults);
@@ -27,6 +31,7 @@ const Characters = () => {
         {charactersResults.map((item) => {
           return (
             <Card
+              key={item.id}
               id={item.id}
               image={item.image}
               name={item.name}

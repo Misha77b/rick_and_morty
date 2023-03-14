@@ -1,14 +1,18 @@
-.app{
-    display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+body {
+  margin: 0;
 }
 
 .pages {
-	max-width: 1020px;
-	margin: 0 auto;
+  max-width: 1020px;
+  margin: 0 auto;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
