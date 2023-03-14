@@ -1,0 +1,16 @@
+.informations-blocks {
+    width: 400px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(33, 33, 33, 0.08);
+    &__title {
+        margin: 10px 0;
+        font-style: 16px;
+        font-weight: 700;
+        color: #081F32;
+    };
+    &__description{
+        font-style: 14px;
+        font-weight: 400;
+        color: #6E798C;
+    }
+}
