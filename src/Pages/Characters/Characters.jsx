@@ -7,11 +7,15 @@ import Search from "../../components/Search/Search";
 import Card from "../../components/Card/Card";
 import { fetchCharacters } from "../../store/reducers/charactersSlice";
 import Loader from "../../components/Loader/Loader";
+import PaginationNav from "../../components/PaginationNav/PaginationNav";
+import { useParams } from "react-router-dom";
 
 const Characters = () => {
   const dispatch = useDispatch();
   const [canRender, setCanRender] = useState(undefined);
-
+  const [pageNumber, setPageNumber] = useState(1);
+  const page = useParams(pageNumber);
+  
   const loading = useSelector((state) => state.charactersReducer.loader);
   const charactersInfo = useSelector((state) => state.charactersReducer.charactersInfo);
   const charactersResults = useSelector((state) => state.charactersReducer.charactersResults);
@@ -21,8 +25,8 @@ const Characters = () => {
 
   useEffect(() => {
     setCanRender(() => false);
-    dispatch(fetchCharacters());
-  }, []);
+    dispatch(fetchCharacters(pageNumber));
+  }, [pageNumber]);
 
   useEffect(() => {
     if (!loading && canRender === false) {
@@ -32,7 +36,7 @@ const Characters = () => {
 
   return (
     <>
-      {!canRender ? <Loader /> : <>
+      {!canRender ? <Loader /> : <div className="characters">
         <Logo />
         <Search />
         <div className="cards-container">
@@ -48,7 +52,8 @@ const Characters = () => {
             );
           })}
         </div>
-      </>}
+        <PaginationNav totalPages={charactersInfo.pages} pageNumber={pageNumber} setPageNumber={setPageNumber} />
+      </div>}
       
     </>
   );

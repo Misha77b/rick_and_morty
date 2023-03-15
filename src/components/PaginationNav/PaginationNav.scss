@@ -1,0 +1,12 @@
+.MuiPaginationItem-root:nth-child(n) {
+    color: #000000,
+}
+
+.MuiPaginationItem-root:nth-child(n).Mui-selected {
+    color: #000000;
+    background: #CCCCCC
+}
+
+.MuiPaginationItem-icon {
+    color: 000000,
+}

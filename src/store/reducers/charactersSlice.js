@@ -8,8 +8,8 @@ const initialState = {
 
 export const fetchCharacters = createAsyncThunk(
   "characters/fetchData",
-  async () => {
-    const response = await fetch(`https://rickandmortyapi.com/api/character`, {
+  async (pageNumber) => {
+    const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${pageNumber}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
