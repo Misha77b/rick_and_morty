@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
   episodesInfo: {},
   episodesResults: [],
+  loader: false,
 };
 
 export const fetchEpisodes = createAsyncThunk(

@@ -2,8 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   singleCharacterData: {},
-  characterOrigin: {}
+  characterOrigin: {},
+  loader: false
 };
+
 export const fetchSingleCharacter = createAsyncThunk(
   "singleCharacter/fetchData",
   async (id) => {

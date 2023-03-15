@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
   locationsInfo: {},
   locationsResults: [],
+  loader: false,
 };
 
 export const fetchLocations = createAsyncThunk(
