@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
-import PaginationItem from '@mui/material/PaginationItem';
 import "./PaginationNav.scss"
 
 const PaginationNav = ({ totalPages, pageNumber, setPageNumber }) => {
@@ -13,7 +12,7 @@ const PaginationNav = ({ totalPages, pageNumber, setPageNumber }) => {
     setPageNumber(num);
     if(num === 1){
       navigate("/");
-    } else navigate(`/${num}`)
+    } else navigate(`/page=${num}`)
   };
 
   return (
@@ -23,13 +22,6 @@ const PaginationNav = ({ totalPages, pageNumber, setPageNumber }) => {
         page={pageNumber}
         onChange={handlePageChange}
         size={"large"}
-        // renderItem={(item) => (
-        //   <PaginationItem
-        //     component={Link}
-        //     to={`/page=${pageNumber}`}
-        //     {...item}
-        //   />
-        // )}
       />
     </Stack>
   )

@@ -14,7 +14,6 @@ const Characters = () => {
   const dispatch = useDispatch();
   const [canRender, setCanRender] = useState(undefined);
   const [pageNumber, setPageNumber] = useState(1);
-  // const page = useParams(pageNumber);
   const { pageNumber: page } = useParams();
   console.log(page);
   
@@ -26,7 +25,11 @@ const Characters = () => {
   console.log(charactersResults);
 
   useEffect(() => {
-    setPageNumber(page ? parseInt(page) : 1);
+    if(page === undefined){
+      setPageNumber(page ? parseInt(page) : 1);
+    } else {
+      setPageNumber(page.split("=").slice(1)[0] ? parseInt(page.split("=").slice(1)[0]) : 1);
+    }
   }, [page]);
 
   useEffect(() => {
