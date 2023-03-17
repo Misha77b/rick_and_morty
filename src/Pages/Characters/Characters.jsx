@@ -14,7 +14,9 @@ const Characters = () => {
   const dispatch = useDispatch();
   const [canRender, setCanRender] = useState(undefined);
   const [pageNumber, setPageNumber] = useState(1);
-  const page = useParams(pageNumber);
+  // const page = useParams(pageNumber);
+  const { pageNumber: page } = useParams();
+  console.log(page);
   
   const loading = useSelector((state) => state.charactersReducer.loader);
   const charactersInfo = useSelector((state) => state.charactersReducer.charactersInfo);
@@ -22,6 +24,10 @@ const Characters = () => {
 
   console.log(charactersInfo);
   console.log(charactersResults);
+
+  useEffect(() => {
+    setPageNumber(page ? parseInt(page) : 1);
+  }, [page]);
 
   useEffect(() => {
     setCanRender(() => false);
