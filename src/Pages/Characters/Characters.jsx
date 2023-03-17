@@ -16,19 +16,23 @@ const Characters = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const { pageNumber: page } = useParams();
   console.log(page);
-  
+
   const loading = useSelector((state) => state.charactersReducer.loader);
-  const charactersInfo = useSelector((state) => state.charactersReducer.charactersInfo);
-  const charactersResults = useSelector((state) => state.charactersReducer.charactersResults);
+  const charactersInfo = useSelector(
+    (state) => state.charactersReducer.charactersInfo
+  );
+  const charactersResults = useSelector(
+    (state) => state.charactersReducer.charactersResults
+  );
 
   console.log(charactersInfo);
   console.log(charactersResults);
 
   useEffect(() => {
-    if(page === undefined){
+    if (page === undefined) {
       setPageNumber(page ? parseInt(page) : 1);
     } else {
-      setPageNumber(page.split("=").slice(1)[0] ? parseInt(page.split("=").slice(1)[0]) : 1);
+      setPageNumber(page ? parseInt(page.split("=").slice(1)[0]) : 1);
     }
   }, [page]);
 
@@ -39,31 +43,38 @@ const Characters = () => {
 
   useEffect(() => {
     if (!loading && canRender === false) {
-			setCanRender(() => true);
-		}
+      setCanRender(() => true);
+    }
   }, [loading]);
 
   return (
     <>
-      {!canRender ? <Loader /> : <div className="characters">
-        <Logo />
-        <Search />
-        <div className="cards-container">
-          {charactersResults.map((item) => {
-            return (
-              <Card
-                key={item.id}
-                id={item.id}
-                image={item.image}
-                name={item.name}
-                species={item.species}
-              />
-            );
-          })}
+      {!canRender ? (
+        <Loader />
+      ) : (
+        <div className="characters">
+          <Logo />
+          <Search />
+          <div className="cards-container">
+            {charactersResults.map((item) => {
+              return (
+                <Card
+                  key={item.id}
+                  id={item.id}
+                  image={item.image}
+                  name={item.name}
+                  species={item.species}
+                />
+              );
+            })}
+          </div>
+          <PaginationNav
+            totalPages={charactersInfo.pages}
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+          />
         </div>
-        <PaginationNav totalPages={charactersInfo.pages} pageNumber={pageNumber} setPageNumber={setPageNumber} />
-      </div>}
-      
+      )}
     </>
   );
 };
