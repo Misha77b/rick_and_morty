@@ -32,7 +32,8 @@ export const charactersSlice = createSlice({
     });
     builder.addCase(fetchCharacters.fulfilled, (state, action) => {
       state.charactersInfo = action.payload.info;
-      state.charactersResults = action.payload.results;
+      // state.charactersResults = action.payload.results;
+      state.charactersResults = action.payload.results.sort((a, b) => a.name.localeCompare(b.name));
       state.loader = false;
     });
   },
