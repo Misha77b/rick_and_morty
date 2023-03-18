@@ -15,15 +15,10 @@ const Characters = () => {
   const [canRender, setCanRender] = useState(undefined);
   const [pageNumber, setPageNumber] = useState(1);
   const { pageNumber: page } = useParams();
-  console.log(page);
 
   const loading = useSelector((state) => state.charactersReducer.loader);
-  const charactersInfo = useSelector(
-    (state) => state.charactersReducer.charactersInfo
-  );
-  const charactersResults = useSelector(
-    (state) => state.charactersReducer.charactersResults
-  );
+  const charactersInfo = useSelector((state) => state.charactersReducer.charactersInfo);
+  const charactersResults = useSelector((state) => state.charactersReducer.charactersResults);
 
   console.log(charactersInfo);
   console.log(charactersResults);
@@ -39,7 +34,7 @@ const Characters = () => {
   useEffect(() => {
     setCanRender(() => false);
     dispatch(fetchCharacters(pageNumber));
-  }, [pageNumber]);
+  }, [page, pageNumber]);
 
   useEffect(() => {
     if (!loading && canRender === false) {

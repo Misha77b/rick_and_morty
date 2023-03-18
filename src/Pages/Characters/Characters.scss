@@ -1,13 +1,22 @@
 .characters {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .cards-container {
+  width: 100%;
   margin-top: 60px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   justify-content: center;
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, 240px);
+  grid-auto-rows: auto;
+  grid-gap: 20px;
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(auto-fill, 310px);
+    grid-gap: 30px;
+  }
 }

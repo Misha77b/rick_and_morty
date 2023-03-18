@@ -1,16 +1,19 @@
 .informations-blocks {
-    width: 400px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(33, 33, 33, 0.08);
-    &__title {
-        margin: 10px 0;
-        font-style: 16px;
-        font-weight: 700;
-        color: #081F32;
-    };
-    &__description{
-        font-style: 14px;
-        font-weight: 400;
-        color: #6E798C;
-    }
+  width: 400px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(33, 33, 33, 0.08);
+  @media screen and (max-width: 600px) {
+    width: 310px;
+  }
+  &__title {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #081f32;
+  }
+  &__description {
+    font-size: 14px;
+    font-weight: 400;
+    color: #6e798c;
+  }
 }
