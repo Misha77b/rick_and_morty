@@ -2,26 +2,59 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Characters.scss";
 import Logo from "../../components/Logo/Logo";
+import useLocationParams from "../../hooks/useLocationParams";
+import { useSearchParams, useParams } from "react-router-dom";
 import Search from "../../components/Search/Search";
 
 import Card from "../../components/Card/Card";
 import { fetchCharacters } from "../../store/reducers/charactersSlice";
 import Loader from "../../components/Loader/Loader";
 import PaginationNav from "../../components/PaginationNav/PaginationNav";
-import { useParams } from "react-router-dom";
+// import { fetchFiletredCharacters } from "../../store/reducers/filteredCharactersSlice";
 
 const Characters = () => {
   const dispatch = useDispatch();
+  // const [characters, setCharacters ] = useState([]);
+  // pagination
   const [canRender, setCanRender] = useState(undefined);
   const [pageNumber, setPageNumber] = useState(1);
   const { pageNumber: page } = useParams();
+  // console.log("characters", characters);
+
+  // filters
+  const [value, setValue] = useState("");
+  const [search, setSearch] = useSearchParams();
+  const { params } = useLocationParams({ name: value });
+  // console.log("search", search);
+  // console.log("params", params);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    console.log(e.target.value);
+
+    if (e.target.value < 1) {
+      search.delete("name");
+      setSearch(search);
+    } else {
+      search.set("name", e.target.value);
+      setSearch(search);
+    }
+    // const filters = {
+    //   name: search.get("name"),
+    // }
+    // log
+    // dispatch(fetchCharacters(params));
+    // dispatch(fetchFiletredCharacters({filters: params}))
+  };
 
   const loading = useSelector((state) => state.charactersReducer.loader);
   const charactersInfo = useSelector((state) => state.charactersReducer.charactersInfo);
   const charactersResults = useSelector((state) => state.charactersReducer.charactersResults);
+  // const filteredCharactersInfo = useSelector((state) => state.filteredCharactersReducer.filteredCharactersInfo);
+  // console.log("filteredCharactersInfo", filteredCharactersInfo);
 
-  console.log(charactersInfo);
-  console.log(charactersResults);
+  // console.log(charactersInfo);
+  // console.log(charactersResults);
 
   useEffect(() => {
     if (page === undefined) {
@@ -32,9 +65,17 @@ const Characters = () => {
   }, [page]);
 
   useEffect(() => {
-    setCanRender(() => false);
-    dispatch(fetchCharacters(pageNumber));
-  }, [page, pageNumber]);
+    if(value.length < 1) {
+      setCanRender(() => false);
+      dispatch(fetchCharacters({pageNumber, filters: ""}))
+    } else {
+      dispatch(fetchCharacters({pageNumber, filters: params}))
+    //   console.log(pageNumber, `name=${search.get("name")}`);
+    //   dispatch(fetchFiletredCharacters({pageNumber, filters: `name=${search.get("name")}`})).then((res) => {
+    //     setCharacters(res.payload.results);
+    //   });;
+    }
+  }, [page, pageNumber, value, params]);
 
   useEffect(() => {
     if (!loading && canRender === false) {
@@ -49,7 +90,7 @@ const Characters = () => {
       ) : (
         <div className="characters">
           <Logo />
-          <Search />
+          <Search value={value} change={handleChange} />
           <div className="cards-container">
             {charactersResults.map((item) => {
               return (
@@ -64,6 +105,7 @@ const Characters = () => {
             })}
           </div>
           <PaginationNav
+            // totalPages={value.length < 1 ? charactersInfo.pages : filteredCharactersInfo.pages}
             totalPages={charactersInfo.pages}
             pageNumber={pageNumber}
             setPageNumber={setPageNumber}
