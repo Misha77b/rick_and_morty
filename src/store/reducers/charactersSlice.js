@@ -8,13 +8,13 @@ const initialState = {
 
 export const fetchCharacters = createAsyncThunk(
   "characters/fetchData",
-  async ({pageNumber, filters}) => {
-    console.log(pageNumber, filters);
-    let url = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`
-    if(filters) {
-      url = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&${filters}`
-    }
-    const response = await fetch(url, {
+  async ({params}) => {
+    // console.log(pageNumber, filters);
+    // let url = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`
+    // if(filters) {
+    //   url = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&${filters}`
+    // }
+    const response = await fetch(`https://rickandmortyapi.com/api/character/?${params}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

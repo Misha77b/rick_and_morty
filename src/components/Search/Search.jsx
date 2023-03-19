@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSearchParams } from "react-router-dom";
-import useLocationParams from "../../hooks/useLocationParams";
-import { fetchCharacters, fetchFiletredCharacters } from "../../store/reducers/charactersSlice";
+// import { useDispatch } from "react-redux";
+// import { useSearchParams } from "react-router-dom";
+// import useLocationParams from "../../hooks/useLocationParams";
+// import { fetchCharacters, fetchFiletredCharacters } from "../../store/reducers/charactersSlice";
 import SearchIcon from "./icon/SearchIcon";
 import "./Search.scss";
 

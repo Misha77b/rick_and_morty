@@ -15,22 +15,27 @@ import PaginationNav from "../../components/PaginationNav/PaginationNav";
 const Characters = () => {
   const dispatch = useDispatch();
   // const [characters, setCharacters ] = useState([]);
+  const [search, setSearch] = useSearchParams();
+  const { params } = useLocationParams();
   // pagination
   const [canRender, setCanRender] = useState(undefined);
   const [pageNumber, setPageNumber] = useState(1);
-  const { pageNumber: page } = useParams();
+  const searchValue = search.get("name");
+  // const { pageNumber: page } = useParams();
+  // console.log(page);
   // console.log("characters", characters);
 
   // filters
   const [value, setValue] = useState("");
-  const [search, setSearch] = useSearchParams();
-  const { params } = useLocationParams({ name: value });
+  const currentPage = search.get("page");
   // console.log("search", search);
   // console.log("params", params);
 
+  console.log();
   const handleChange = (e) => {
     setValue(e.target.value);
     console.log(e.target.value);
+    search.delete("page")
 
     if (e.target.value < 1) {
       search.delete("name");
@@ -57,25 +62,31 @@ const Characters = () => {
   // console.log(charactersResults);
 
   useEffect(() => {
-    if (page === undefined) {
-      setPageNumber(page ? parseInt(page) : 1);
+    if (currentPage === null) {
+      setPageNumber(currentPage ? parseInt(currentPage) : 1);
     } else {
-      setPageNumber(page ? parseInt(page.split("=").slice(1)[0]) : 1);
+      setPageNumber(currentPage ? parseInt(currentPage) : 1);
     }
-  }, [page]);
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (searchValue) {
+      setValue(searchValue);
+    } 
+  }, [searchValue]);
 
   useEffect(() => {
     if(value.length < 1) {
       setCanRender(() => false);
-      dispatch(fetchCharacters({pageNumber, filters: ""}))
+      dispatch(fetchCharacters({params}))
     } else {
-      dispatch(fetchCharacters({pageNumber, filters: params}))
+      dispatch(fetchCharacters({params}))
     //   console.log(pageNumber, `name=${search.get("name")}`);
     //   dispatch(fetchFiletredCharacters({pageNumber, filters: `name=${search.get("name")}`})).then((res) => {
     //     setCharacters(res.payload.results);
     //   });;
     }
-  }, [page, pageNumber, value, params]);
+  }, [ pageNumber, value, params]);
 
   useEffect(() => {
     if (!loading && canRender === false) {
