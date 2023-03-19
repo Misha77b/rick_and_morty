@@ -8,18 +8,16 @@ const initialState = {
 
 export const fetchCharacters = createAsyncThunk(
   "characters/fetchData",
-  async ({params}) => {
-    // console.log(pageNumber, filters);
-    // let url = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`
-    // if(filters) {
-    //   url = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&${filters}`
-    // }
-    const response = await fetch(`https://rickandmortyapi.com/api/character/?${params}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+  async ({ params }) => {
+    const response = await fetch(
+      `https://rickandmortyapi.com/api/character/?${params}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .catch((err) => {
         console.warn(err);
@@ -38,7 +36,9 @@ export const charactersSlice = createSlice({
     builder.addCase(fetchCharacters.fulfilled, (state, action) => {
       state.charactersInfo = action.payload.info;
       // state.charactersResults = action.payload.results;
-      state.charactersResults = action.payload.results.sort((a, b) => a.name.localeCompare(b.name));
+      state.charactersResults = action.payload.results.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
       state.loader = false;
     });
   },

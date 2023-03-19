@@ -6,12 +6,9 @@ import Location from "../Pages/Location/Location";
 import Episodes from "../Pages/Episodes/Episodes";
 
 const RootRoutes = () => {
-  
   return (
     <Routes>
       <Route path="/" element={<Characters />} />
-      {/* <Route path="/:pageNumber" element={<Characters />} /> */}
-      {/* <Route path={`/?page=:${pageNumber}`} element={<Characters />} /> */}
       <Route path="/character/:id" element={<CharacterPage />} />
       <Route path="/locations" element={<Location />} />
       <Route path="/episodes" element={<Episodes />} />

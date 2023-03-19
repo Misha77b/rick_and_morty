@@ -10,32 +10,29 @@ import Card from "../../components/Card/Card";
 import { fetchCharacters } from "../../store/reducers/charactersSlice";
 import Loader from "../../components/Loader/Loader";
 import PaginationNav from "../../components/PaginationNav/PaginationNav";
-// import { fetchFiletredCharacters } from "../../store/reducers/filteredCharactersSlice";
 
 const Characters = () => {
   const dispatch = useDispatch();
-  // const [characters, setCharacters ] = useState([]);
   const [search, setSearch] = useSearchParams();
   const { params } = useLocationParams();
+
   // pagination
   const [canRender, setCanRender] = useState(undefined);
   const [pageNumber, setPageNumber] = useState(1);
   const searchValue = search.get("name");
-  // const { pageNumber: page } = useParams();
-  // console.log(page);
-  // console.log("characters", characters);
 
   // filters
   const [value, setValue] = useState("");
   const currentPage = search.get("page");
-  // console.log("search", search);
-  // console.log("params", params);
+  
+  // selectors
+  const loading = useSelector((state) => state.charactersReducer.loader);
+  const charactersInfo = useSelector((state) => state.charactersReducer.charactersInfo);
+  const charactersResults = useSelector((state) => state.charactersReducer.charactersResults);
 
-  console.log();
   const handleChange = (e) => {
     setValue(e.target.value);
-    console.log(e.target.value);
-    search.delete("page")
+    search.delete("page");
 
     if (e.target.value < 1) {
       search.delete("name");
@@ -44,22 +41,8 @@ const Characters = () => {
       search.set("name", e.target.value);
       setSearch(search);
     }
-    // const filters = {
-    //   name: search.get("name"),
-    // }
-    // log
-    // dispatch(fetchCharacters(params));
-    // dispatch(fetchFiletredCharacters({filters: params}))
   };
 
-  const loading = useSelector((state) => state.charactersReducer.loader);
-  const charactersInfo = useSelector((state) => state.charactersReducer.charactersInfo);
-  const charactersResults = useSelector((state) => state.charactersReducer.charactersResults);
-  // const filteredCharactersInfo = useSelector((state) => state.filteredCharactersReducer.filteredCharactersInfo);
-  // console.log("filteredCharactersInfo", filteredCharactersInfo);
-
-  // console.log(charactersInfo);
-  // console.log(charactersResults);
 
   useEffect(() => {
     if (currentPage === null) {
@@ -72,21 +55,17 @@ const Characters = () => {
   useEffect(() => {
     if (searchValue) {
       setValue(searchValue);
-    } 
+    }
   }, [searchValue]);
 
   useEffect(() => {
-    if(value.length < 1) {
+    if (value.length < 1) {
       setCanRender(() => false);
-      dispatch(fetchCharacters({params}))
+      dispatch(fetchCharacters({ params }));
     } else {
-      dispatch(fetchCharacters({params}))
-    //   console.log(pageNumber, `name=${search.get("name")}`);
-    //   dispatch(fetchFiletredCharacters({pageNumber, filters: `name=${search.get("name")}`})).then((res) => {
-    //     setCharacters(res.payload.results);
-    //   });;
+      dispatch(fetchCharacters({ params }));
     }
-  }, [ pageNumber, value, params]);
+  }, [pageNumber, value, params]);
 
   useEffect(() => {
     if (!loading && canRender === false) {
@@ -116,7 +95,6 @@ const Characters = () => {
             })}
           </div>
           <PaginationNav
-            // totalPages={value.length < 1 ? charactersInfo.pages : filteredCharactersInfo.pages}
             totalPages={charactersInfo.pages}
             pageNumber={pageNumber}
             setPageNumber={setPageNumber}
