@@ -25,7 +25,8 @@ const PaginationNav = ({ totalPages, pageNumber, setPageNumber }) => {
         count={totalPages || 0}
         page={pageNumber}
         onChange={handlePageChange}
-        size={"large"}
+        // size={"large"}
+        size={"small"}
       />
     </Stack>
   );

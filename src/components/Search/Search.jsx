@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import SearchIcon from "./icon/SearchIcon";
 import "./Search.scss";
 
@@ -22,3 +23,8 @@ const Search = ({ value, change }) => {
 };
 
 export default Search;
+
+Search.propTypes = {
+  value: PropTypes.string,
+  change: PropTypes.func,
+};
