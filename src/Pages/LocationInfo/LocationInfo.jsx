@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader/Loader";
-import "./Location.scss";
+import "./LocationInfo.scss";
 import Card from "../../components/Card/Card";
 import {
   fetchLocations,
   fetchLocationsCharacters,
 } from "../../store/reducers/locationSlice";
 
-const Location = () => {
+const LocationInfo = () => {
   const dispatch = useDispatch();
   const [canRender, setCanRender] = useState(undefined);
   const [location, setLocation] = useState(1);
@@ -81,4 +81,4 @@ const Location = () => {
   );
 };
 
-export default Location;
+export default LocationInfo;
