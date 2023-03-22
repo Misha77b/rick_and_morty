@@ -49,17 +49,22 @@ export const fetchLocationCharacters = createAsyncThunk(
 export const singleLocationSlice = createSlice({
   name: "singleCharacter",
   initialState,
-  reducers: {},
+  reducers: {
+    setLocationResidents: (state, action) => {
+      state.locationResidents = action.payload;
+      state.loader = false;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchLocation.pending, (state) => {
       state.loader = true;
     });
     builder.addCase(fetchLocation.fulfilled, (state, action) => {
       state.locationInfo = action.payload;
-      state.loader = false;
+      //   state.loader = false;
     });
     builder.addCase(fetchLocationCharacters.pending, (state) => {
-      state.loader = true;
+      //   state.loader = true;
     });
     builder.addCase(fetchLocationCharacters.fulfilled, (state, action) => {
       state.locationResidents = action.payload;
@@ -68,4 +73,5 @@ export const singleLocationSlice = createSlice({
   },
 });
 
+export const { setLocationResidents } = singleLocationSlice.actions;
 export default singleLocationSlice.reducer;

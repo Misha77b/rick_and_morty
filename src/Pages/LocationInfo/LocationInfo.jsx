@@ -7,14 +7,18 @@ import Card from "../../components/Card/Card";
 import {
   fetchLocation,
   fetchLocationCharacters,
+  setLocationResidents,
 } from "../../store/reducers/singleLocationSlice";
+import GoBackBtn from "../../components/GoBackBtn/GoBackBtn";
 
 const LocationInfo = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [canRender, setCanRender] = useState(undefined);
   const { id } = useParams();
   //   const [location, setLocation] = useState(1);
   const charactersId = [];
+  //   console.log("charactersId", charactersId);
 
   const loading = useSelector((state) => state.singleLocationReducer.loader);
   const locationInfo = useSelector(
@@ -25,7 +29,12 @@ const LocationInfo = () => {
   );
 
   //   console.log("results", locationInfo);
-  //   console.log("locationCharacters", locationResidents);
+  // console.log("locationCharacters", locationResidents);
+
+  const handleGoBack = (e) => {
+    e.preventDefault();
+    navigate(-1);
+  };
 
   useEffect(() => {
     setCanRender(() => false);
@@ -40,22 +49,14 @@ const LocationInfo = () => {
         });
         return res.payload;
       })
-
       .then((data) => {
-        dispatch(fetchLocationCharacters(charactersId));
+        if (!charactersId.length) {
+          dispatch(setLocationResidents([]));
+          return data;
+        } else {
+          dispatch(fetchLocationCharacters(charactersId));
+        }
       });
-    //   .then((res) => res.payload.residents)
-    //   .then((data) =>
-    //   data.forEach((item) => {
-    //       // let str = ''
-    //       //   console.log(item.split("/").slice(-1).toString());
-    //       charactersId.push(item.split("/").slice(-1).toString())
-    //       // dispatch(fetchLocationsCharacters(item))
-    //       console.log(charactersId.toString());
-    //     })
-    //     );
-    //   )
-    // dispatch(fetchLocationsCharacters(charactersId));
   }, []);
 
   useEffect(() => {
@@ -64,6 +65,8 @@ const LocationInfo = () => {
     }
   }, [loading]);
 
+  console.log(Array.isArray(locationResidents));
+
   return (
     <>
       {!canRender ? (
@@ -71,8 +74,31 @@ const LocationInfo = () => {
       ) : (
         <div className="locations">
           <div>Location</div>
+          <GoBackBtn goBack={handleGoBack} />
           <div className="locationCards-container">
-            {locationResidents.map((item) => {
+            {!locationResidents.length && <span>No characters</span>}
+            {Array.isArray(locationResidents) ? (
+              locationResidents.map((item) => {
+                return (
+                  <Card
+                    key={item.id}
+                    id={item.id}
+                    image={item.image}
+                    name={item.name}
+                    species={item.species}
+                  />
+                );
+              })
+            ) : (
+              <Card
+                key={locationResidents.id}
+                id={locationResidents.id}
+                image={locationResidents.image}
+                name={locationResidents.name}
+                species={locationResidents.species}
+              />
+            )}
+            {/* {locationResidents.map((item) => {
               return (
                 <Card
                   key={item.id}
@@ -82,7 +108,7 @@ const LocationInfo = () => {
                   species={item.species}
                 />
               );
-            })}
+            })} */}
           </div>
         </div>
       )}
