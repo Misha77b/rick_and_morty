@@ -21,15 +21,11 @@ const LocationInfo = () => {
   //   console.log("charactersId", charactersId);
 
   const loading = useSelector((state) => state.singleLocationReducer.loader);
-  const locationInfo = useSelector(
-    (state) => state.singleLocationReducer.locationInfo
-  );
-  const locationResidents = useSelector(
-    (state) => state.singleLocationReducer.locationResidents
-  );
+  const locationInfo = useSelector((state) => state.singleLocationReducer.locationInfo);
+  const locationResidents = useSelector((state) => state.singleLocationReducer.locationResidents);
 
   //   console.log("results", locationInfo);
-  // console.log("locationCharacters", locationResidents);
+  console.log("locationCharacters", locationResidents);
 
   const handleGoBack = (e) => {
     e.preventDefault();
@@ -41,16 +37,13 @@ const LocationInfo = () => {
     dispatch(fetchLocation(id))
       .then((res) => {
         res.payload.residents.forEach((item) => {
-          // let str = ''
-          //   console.log(item.split("/").slice(-1).toString());
           charactersId.push(item.split("/").slice(-1).toString());
-          // dispatch(fetchLocationsCharacters(item))
           charactersId.toString();
         });
         return res.payload;
       })
       .then((data) => {
-        if (!charactersId.length) {
+        if (data.residents.length < 1) {
           dispatch(setLocationResidents([]));
           return data;
         } else {
@@ -65,8 +58,6 @@ const LocationInfo = () => {
     }
   }, [loading]);
 
-  console.log(Array.isArray(locationResidents));
-
   return (
     <>
       {!canRender ? (
@@ -76,7 +67,7 @@ const LocationInfo = () => {
           <div>Location</div>
           <GoBackBtn goBack={handleGoBack} />
           <div className="locationCards-container">
-            {!locationResidents.length && <span>No characters</span>}
+            {locationResidents.length < 1 && <span>No characters</span>}
             {Array.isArray(locationResidents) ? (
               locationResidents.map((item) => {
                 return (
