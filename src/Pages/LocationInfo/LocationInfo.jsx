@@ -1,51 +1,60 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import "./LocationInfo.scss";
 import Card from "../../components/Card/Card";
 import {
-  fetchLocations,
-  fetchLocationsCharacters,
-} from "../../store/reducers/locationSlice";
+  fetchLocation,
+  fetchLocationCharacters,
+} from "../../store/reducers/singleLocationSlice";
 
 const LocationInfo = () => {
   const dispatch = useDispatch();
   const [canRender, setCanRender] = useState(undefined);
-  const [location, setLocation] = useState(1);
+  const { id } = useParams();
+  //   const [location, setLocation] = useState(1);
   const charactersId = [];
 
-  const loading = useSelector((state) => state.locationReducer.loader);
-  //   const locationsInfo = useSelector((state) => state.locationReducer.locationsInfo);
-  const locationsResults = useSelector((state) => state.locationReducer.locationsResults);
-  const locationCharacters = useSelector((state) => state.locationReducer.locationCharacters);
+  const loading = useSelector((state) => state.singleLocationReducer.loader);
+  const locationInfo = useSelector(
+    (state) => state.singleLocationReducer.locationInfo
+  );
+  const locationResidents = useSelector(
+    (state) => state.singleLocationReducer.locationResidents
+  );
 
-  //   console.log("info", locationsInfo);
-  //   console.log("results", locationsResults);
-  console.log("locationCharacters", locationCharacters);
+  //   console.log("results", locationInfo);
+  //   console.log("locationCharacters", locationResidents);
 
   useEffect(() => {
     setCanRender(() => false);
-    dispatch(fetchLocations(location))
-      //   .then((res) => res.payload.residents)
-      //   .then((data) =>
-      //   data.forEach((item) => {
-      //       // let str = ''
-      //       //   console.log(item.split("/").slice(-1).toString());
-      //       charactersId.push(item.split("/").slice(-1).toString())
-      //       // dispatch(fetchLocationsCharacters(item))
-      //       console.log(charactersId.toString());
-      //     })
-      //     );
-      .then((res) =>
+    dispatch(fetchLocation(id))
+      .then((res) => {
         res.payload.residents.forEach((item) => {
           // let str = ''
           //   console.log(item.split("/").slice(-1).toString());
           charactersId.push(item.split("/").slice(-1).toString());
           // dispatch(fetchLocationsCharacters(item))
-          console.log(charactersId.toString());
-        })
-      )
-      .then((data) => dispatch(fetchLocationsCharacters(charactersId)))
+          charactersId.toString();
+        });
+        return res.payload;
+      })
+
+      .then((data) => {
+        dispatch(fetchLocationCharacters(charactersId));
+      });
+    //   .then((res) => res.payload.residents)
+    //   .then((data) =>
+    //   data.forEach((item) => {
+    //       // let str = ''
+    //       //   console.log(item.split("/").slice(-1).toString());
+    //       charactersId.push(item.split("/").slice(-1).toString())
+    //       // dispatch(fetchLocationsCharacters(item))
+    //       console.log(charactersId.toString());
+    //     })
+    //     );
+    //   )
     // dispatch(fetchLocationsCharacters(charactersId));
   }, []);
 
@@ -63,7 +72,7 @@ const LocationInfo = () => {
         <div className="locations">
           <div>Location</div>
           <div className="locationCards-container">
-            {locationCharacters.map((item) => {
+            {locationResidents.map((item) => {
               return (
                 <Card
                   key={item.id}

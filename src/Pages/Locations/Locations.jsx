@@ -8,7 +8,6 @@ import PaginationNav from "../../components/PaginationNav/PaginationNav";
 import LocationCard from "../../components/LocationCard/LocationCard";
 import {
   fetchLocations,
-  fetchLocationsCharacters,
 } from "../../store/reducers/locationSlice";
 
 const Locations = () => {
@@ -23,12 +22,8 @@ const Locations = () => {
   //   const searchValue = search.get("name");
 
   const loading = useSelector((state) => state.locationReducer.loader);
-  const locationsInfo = useSelector(
-    (state) => state.locationReducer.locationsInfo
-  );
-  const locationsResults = useSelector(
-    (state) => state.locationReducer.locationsResults
-  );
+  const locationsInfo = useSelector((state) => state.locationReducer.locationsInfo);
+  const locationsResults = useSelector((state) => state.locationReducer.locationsResults);
 
   console.log("info", locationsInfo);
   console.log("results", locationsResults);
