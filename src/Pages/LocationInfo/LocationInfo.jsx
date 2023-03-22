@@ -23,7 +23,7 @@ const LocationInfo = () => {
 
   const handleGoBack = (e) => {
     e.preventDefault();
-    navigate(-1);
+    navigate("/locations");
   };
 
   const loading = useSelector((state) => state.singleLocationReducer.loader);
@@ -34,7 +34,7 @@ const LocationInfo = () => {
     (state) => state.singleLocationReducer.locationResidents
   );
 
-  console.log("info", locationInfo);
+  //   console.log("info", locationInfo);
   //   console.log("locationCharacters", locationResidents);
 
   useEffect(() => {
