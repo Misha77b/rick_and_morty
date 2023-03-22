@@ -13,11 +13,11 @@ import PaginationNav from "../../components/PaginationNav/PaginationNav";
 
 const Characters = () => {
   const dispatch = useDispatch();
+  const [canRender, setCanRender] = useState(undefined);
   const [search, setSearch] = useSearchParams();
   const { params } = useLocationParams();
 
   // pagination
-  const [canRender, setCanRender] = useState(undefined);
   const [pageNumber, setPageNumber] = useState(1);
   const searchValue = search.get("name");
 

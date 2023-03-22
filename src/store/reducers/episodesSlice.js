@@ -26,6 +26,7 @@ export const fetchEpisodes = createAsyncThunk(
 export const episodesSlice = createSlice({
   name: "locations",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchEpisodes.pending, (state) => {
       state.loader = true;

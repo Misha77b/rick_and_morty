@@ -26,6 +26,7 @@ export const fetchSingleCharacter = createAsyncThunk(
 export const singleCharacterSlice = createSlice({
   name: "singleCharacter",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchSingleCharacter.pending, (state) => {
       state.loader = true;
