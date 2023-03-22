@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader/Loader";
 import "./Locations.scss";
 import useLocationParams from "../../hooks/useLocationParams";
-import { useSearchParams, useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import PaginationNav from "../../components/PaginationNav/PaginationNav";
-import LocationCard from "../../components/LocationCard/LocationCard";
-import {
-  fetchLocations,
-} from "../../store/reducers/locationSlice";
+import LocationAndEpisodeCard from "../../components/LocationAndEpisodeCard/LocationAndEpisodeCard";
+import { fetchLocations } from "../../store/reducers/locationSlice";
 
 const Locations = () => {
   const dispatch = useDispatch();
@@ -22,8 +20,12 @@ const Locations = () => {
   //   const searchValue = search.get("name");
 
   const loading = useSelector((state) => state.locationReducer.loader);
-  const locationsInfo = useSelector((state) => state.locationReducer.locationsInfo);
-  const locationsResults = useSelector((state) => state.locationReducer.locationsResults);
+  const locationsInfo = useSelector(
+    (state) => state.locationReducer.locationsInfo
+  );
+  const locationsResults = useSelector(
+    (state) => state.locationReducer.locationsResults
+  );
 
   console.log("info", locationsInfo);
   console.log("results", locationsResults);
@@ -53,11 +55,11 @@ const Locations = () => {
         <Loader />
       ) : (
         <div className="locations">
-          <div>Choose location</div>
+          <div className="locations__title">Locations</div>
           <div className="locationCards-container">
             {locationsResults.map((item) => {
               return (
-                <LocationCard
+                <LocationAndEpisodeCard
                   key={item.id}
                   id={item.id}
                   name={item.name}

@@ -6,6 +6,7 @@ import Infromations from "./components/Informations/Infromations";
 import Loader from "../../components/Loader/Loader";
 import "./CharacterPage.scss";
 import GoBackBtn from "../../components/GoBackBtn/GoBackBtn";
+import { characterBtnStyle } from "../../components/GoBackBtn/GoBackStyles/style";
 
 const CharacterPage = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const CharacterPage = () => {
   console.log(characterOrigin);
 
   const goBack = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     navigate(-1);
   };
 
@@ -41,7 +42,7 @@ const CharacterPage = () => {
         <Loader />
       ) : (
         <div className="character-page">
-          <GoBackBtn goBack={goBack} />
+          <GoBackBtn btnStyle={characterBtnStyle} goBack={goBack} />
           <div className="character-info">
             <div className="img-container">
               <img

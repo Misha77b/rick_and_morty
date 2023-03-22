@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import "./LocationInfo.scss";
-import Card from "../../components/Card/Card";
 import {
   fetchLocation,
   fetchLocationCharacters,
   setLocationResidents,
 } from "../../store/reducers/singleLocationSlice";
+import { locationAndEpisodeBtnStyle } from "../../components/GoBackBtn/GoBackStyles/style";
 import GoBackBtn from "../../components/GoBackBtn/GoBackBtn";
+import LocationAndEpisodeCharacters from "../../components/LocationAndEpisodeCharacters/LocationAndEpisodeCharacters";
 
 const LocationInfo = () => {
   const dispatch = useDispatch();
@@ -20,17 +21,21 @@ const LocationInfo = () => {
   const charactersId = [];
   //   console.log("charactersId", charactersId);
 
-  const loading = useSelector((state) => state.singleLocationReducer.loader);
-  const locationInfo = useSelector((state) => state.singleLocationReducer.locationInfo);
-  const locationResidents = useSelector((state) => state.singleLocationReducer.locationResidents);
-
-  //   console.log("results", locationInfo);
-  console.log("locationCharacters", locationResidents);
-
   const handleGoBack = (e) => {
     e.preventDefault();
     navigate(-1);
   };
+
+  const loading = useSelector((state) => state.singleLocationReducer.loader);
+  const locationInfo = useSelector(
+    (state) => state.singleLocationReducer.locationInfo
+  );
+  const locationResidents = useSelector(
+    (state) => state.singleLocationReducer.locationResidents
+  );
+
+  console.log("info", locationInfo);
+  //   console.log("locationCharacters", locationResidents);
 
   useEffect(() => {
     setCanRender(() => false);
@@ -63,44 +68,24 @@ const LocationInfo = () => {
       {!canRender ? (
         <Loader />
       ) : (
-        <div className="locations">
-          <div>Location</div>
-          <GoBackBtn goBack={handleGoBack} />
-          <div className="locationCards-container">
-            {locationResidents.length < 1 && <span>No characters</span>}
-            {Array.isArray(locationResidents) ? (
-              locationResidents.map((item) => {
-                return (
-                  <Card
-                    key={item.id}
-                    id={item.id}
-                    image={item.image}
-                    name={item.name}
-                    species={item.species}
-                  />
-                );
-              })
-            ) : (
-              <Card
-                key={locationResidents.id}
-                id={locationResidents.id}
-                image={locationResidents.image}
-                name={locationResidents.name}
-                species={locationResidents.species}
-              />
-            )}
-            {/* {locationResidents.map((item) => {
-              return (
-                <Card
-                  key={item.id}
-                  id={item.id}
-                  image={item.image}
-                  name={item.name}
-                  species={item.species}
-                />
-              );
-            })} */}
-          </div>
+        <div className="location-info">
+          <GoBackBtn
+            btnStyle={locationAndEpisodeBtnStyle}
+            goBack={handleGoBack}
+          />
+          {locationResidents.length ? (
+            <div className="location-description">
+              <span className="location-description__name">
+                Location: {locationInfo.name}
+              </span>
+              <span className="location-description__dimesion">
+                {locationInfo.dimension === "unknown"
+                  ? `Dimesion: ${locationInfo.dimension}`
+                  : locationInfo.dimension}
+              </span>
+            </div>
+          ) : null}
+          <LocationAndEpisodeCharacters characters={locationResidents} />
         </div>
       )}
     </>

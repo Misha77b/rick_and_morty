@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Characters.scss";
 import Logo from "../../components/Logo/Logo";
 import useLocationParams from "../../hooks/useLocationParams";
-import { useSearchParams, useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Search from "../../components/Search/Search";
 
 import Card from "../../components/Card/Card";
@@ -24,7 +24,7 @@ const Characters = () => {
   // filters
   const [value, setValue] = useState("");
   const currentPage = search.get("page");
-  
+
   // selectors
   const loading = useSelector((state) => state.charactersReducer.loader);
   const charactersInfo = useSelector((state) => state.charactersReducer.charactersInfo);
@@ -42,7 +42,6 @@ const Characters = () => {
       setSearch(search);
     }
   };
-
 
   useEffect(() => {
     if (currentPage === null) {
