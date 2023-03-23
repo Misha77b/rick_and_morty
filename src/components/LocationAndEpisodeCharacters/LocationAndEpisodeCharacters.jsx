@@ -26,8 +26,10 @@ const LocationAndEpisodeCharacters = ({ characters }) => {
 
   return (
     <>
+      {characters.length < 1 && (
+        <span className="characters_empty">No characters</span>
+      )}
       <div className="locationCards-container">
-        {characters.length < 1 && <span>No characters</span>}
         {Array.isArray(characters) ? (
           <Pagination
             characters={characters.slice(
@@ -39,13 +41,13 @@ const LocationAndEpisodeCharacters = ({ characters }) => {
           <Pagination characters={characters} />
         )}
       </div>
-      {/* {!characters.length < 1 && ( */}
-      <PaginationNav
-        totalPages={totalPages.slice(-1).toString()}
-        pageNumber={currentpage}
-        setPageNumber={setCurrentPage}
-      />
-      {/* )} */}
+      {!characters.length < 1 && (
+        <PaginationNav
+          totalPages={parseInt(totalPages.slice(-1))}
+          pageNumber={currentpage}
+          setPageNumber={setCurrentPage}
+        />
+      )}
     </>
   );
 };

@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import SearchIcon from "./icons/SearchIcon";
 import "./Search.scss";
+import ClearIncon from "./icons/ClearIncon";
+import { Button } from "@mui/material";
 
-const Search = ({ value, change }) => {
+const Search = ({ value, change, clearSearch }) => {
   return (
     <div className="search">
       <SearchIcon />
@@ -14,10 +16,11 @@ const Search = ({ value, change }) => {
         name="search-input"
         value={value}
         aria-labelledby="label-fname"
+        placeholder="Filter by name"
       />
-      <label className="search__label" htmlFor="search-input" id="label-fname">
-        <div className="search__label-text">Filter by name</div>
-      </label>
+      <Button className="search__clear-icon" onClick={clearSearch}>
+        <ClearIncon />
+      </Button>
     </div>
   );
 };
@@ -27,4 +30,5 @@ export default Search;
 Search.propTypes = {
   value: PropTypes.string,
   change: PropTypes.func,
+  clearSearch: PropTypes.func,
 };

@@ -42,6 +42,15 @@ const Characters = () => {
     }
   };
 
+  const clearSearch = () => {
+    if (searchValue) {
+      search.delete("page");
+      search.delete("name");
+      setSearch(search);
+      setValue("");
+    }
+  };
+
   useEffect(() => {
     if (currentPage === null) {
       setPageNumber(currentPage ? parseInt(currentPage) : 1);
@@ -78,7 +87,11 @@ const Characters = () => {
       ) : (
         <div className="characters">
           <Logo />
-          <Search value={value} change={handleChange} />
+          <Search
+            value={value}
+            change={handleChange}
+            clearSearch={clearSearch}
+          />
           <div className="cards-container">
             {charactersResults.map((item) => {
               return (

@@ -1,5 +1,6 @@
 .character-page {
   width: 100%;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
 }
@@ -43,9 +44,9 @@
 }
 
 .character-img {
-    border-radius: 150px;
-    object-fit: contain;
-    @media screen and (max-width: 600px) {
-        width: 150px;
-    }
+  border-radius: 150px;
+  object-fit: contain;
+  @media screen and (max-width: 600px) {
+    width: 150px;
+  }
 }
