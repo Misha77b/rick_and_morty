@@ -17,18 +17,10 @@ const Locations = () => {
   // pagination
   const [pageNumber, setPageNumber] = useState(1);
   const currentPage = search.get("page");
-  //   const searchValue = search.get("name");
 
   const loading = useSelector((state) => state.locationReducer.loader);
-  const locationsInfo = useSelector(
-    (state) => state.locationReducer.locationsInfo
-  );
-  const locationsResults = useSelector(
-    (state) => state.locationReducer.locationsResults
-  );
-
-  console.log("info", locationsInfo);
-  console.log("results", locationsResults);
+  const locationsInfo = useSelector((state) => state.locationReducer.locationsInfo);
+  const locationsResults = useSelector((state) => state.locationReducer.locationsResults);
 
   useEffect(() => {
     if (currentPage === null) {

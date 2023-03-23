@@ -5,7 +5,6 @@ import Logo from "../../components/Logo/Logo";
 import useLocationParams from "../../hooks/useLocationParams";
 import { useSearchParams } from "react-router-dom";
 import Search from "../../components/Search/Search";
-
 import Card from "../../components/Card/Card";
 import { fetchCharacters } from "../../store/reducers/charactersSlice";
 import Loader from "../../components/Loader/Loader";

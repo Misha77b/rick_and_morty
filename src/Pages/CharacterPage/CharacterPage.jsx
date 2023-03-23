@@ -17,8 +17,6 @@ const CharacterPage = () => {
   const loading = useSelector((state) => state.singleCharacteReducer.loader);
   const singleCharacterData = useSelector((state) => state.singleCharacteReducer.singleCharacterData);
   const characterOrigin = useSelector((state) => state.singleCharacteReducer.characterOrigin);
-  console.log(singleCharacterData);
-  console.log(characterOrigin);
 
   const goBack = (e) => {
     e.preventDefault();

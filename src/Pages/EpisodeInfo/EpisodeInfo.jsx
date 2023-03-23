@@ -25,12 +25,8 @@ const EpisodeInfo = () => {
   };
 
   const loading = useSelector((state) => state.singleEpisodeReducer.loader);
-  const episodeInfo = useSelector(
-    (state) => state.singleEpisodeReducer.episodeInfo
-  );
-  const episodeCharacters = useSelector(
-    (state) => state.singleEpisodeReducer.episodeCharacters
-  );
+  const episodeInfo = useSelector((state) => state.singleEpisodeReducer.episodeInfo);
+  const episodeCharacters = useSelector((state) => state.singleEpisodeReducer.episodeCharacters);
 
   useEffect(() => {
     setCanRender(() => false);
@@ -63,17 +59,17 @@ const EpisodeInfo = () => {
       {!canRender ? (
         <Loader />
       ) : (
-        <div className="location-info">
+        <div className="episode-info">
           <GoBackBtn
             btnStyle={locationAndEpisodeBtnStyle}
             goBack={handleGoBack}
           />
           {episodeCharacters.length ? (
-            <div className="location-description">
-              <span className="location-description__name">
+            <div className="episode-description">
+              <span className="episode-description__name">
                 Episode: {episodeInfo.name}
               </span>
-              <span className="location-description__dimesion">
+              <span className="episode-description__episode">
                 {episodeInfo.episode}
               </span>
             </div>

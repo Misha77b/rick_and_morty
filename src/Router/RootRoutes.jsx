@@ -10,13 +10,12 @@ import EpisodeInfo from "../Pages/EpisodeInfo/EpisodeInfo";
 const RootRoutes = () => {
   return (
     <Routes>
-      {/* characters */}
       <Route path="/" element={<Characters />} />
       <Route path="/character/:id" element={<CharacterPage />} />
-      {/* Locations */}
+      
       <Route path="/locations" element={<Locations />} />
       <Route path="/location/:id" element={<LocationInfo />} />
-      {/* episodes */}
+      
       <Route path="/episodes" element={<Episodes />} />
       <Route path="/episode/:id" element={<EpisodeInfo />} />
     </Routes>

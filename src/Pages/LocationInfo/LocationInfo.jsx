@@ -17,9 +17,7 @@ const LocationInfo = () => {
   const navigate = useNavigate();
   const [canRender, setCanRender] = useState(undefined);
   const { id } = useParams();
-  //   const [location, setLocation] = useState(1);
   const charactersId = [];
-  //   console.log("charactersId", charactersId);
 
   const handleGoBack = (e) => {
     e.preventDefault();
@@ -27,15 +25,8 @@ const LocationInfo = () => {
   };
 
   const loading = useSelector((state) => state.singleLocationReducer.loader);
-  const locationInfo = useSelector(
-    (state) => state.singleLocationReducer.locationInfo
-  );
-  const locationResidents = useSelector(
-    (state) => state.singleLocationReducer.locationResidents
-  );
-
-  //   console.log("info", locationInfo);
-  //   console.log("locationCharacters", locationResidents);
+  const locationInfo = useSelector((state) => state.singleLocationReducer.locationInfo);
+  const locationResidents = useSelector((state) => state.singleLocationReducer.locationResidents);
 
   useEffect(() => {
     setCanRender(() => false);

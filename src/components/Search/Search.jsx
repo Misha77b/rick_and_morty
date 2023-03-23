@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SearchIcon from "./icon/SearchIcon";
+import SearchIcon from "./icons/SearchIcon";
 import "./Search.scss";
 
 const Search = ({ value, change }) => {

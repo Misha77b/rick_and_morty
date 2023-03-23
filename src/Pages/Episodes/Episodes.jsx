@@ -19,15 +19,8 @@ const Episodes = () => {
   const currentPage = search.get("page");
 
   const loading = useSelector((state) => state.episodesReducer.loader);
-  const episodesInfo = useSelector(
-    (state) => state.episodesReducer.episodesInfo
-  );
-  const episodesResults = useSelector(
-    (state) => state.episodesReducer.episodesResults
-  );
-
-  console.log("info", episodesInfo);
-  console.log("results", episodesResults);
+  const episodesInfo = useSelector((state) => state.episodesReducer.episodesInfo);
+  const episodesResults = useSelector((state) => state.episodesReducer.episodesResults);
 
   useEffect(() => {
     if (currentPage === null) {

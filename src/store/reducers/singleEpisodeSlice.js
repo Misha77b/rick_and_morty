@@ -61,11 +61,8 @@ export const singleEpisodeSlice = createSlice({
     });
     builder.addCase(fetchEpisode.fulfilled, (state, action) => {
       state.episodeInfo = action.payload;
-      //   state.loader = false;
     });
-    builder.addCase(fetchEpisodeCharacters.pending, (state) => {
-      //   state.loader = true;
-    });
+    builder.addCase(fetchEpisodeCharacters.pending, (state) => {});
     builder.addCase(fetchEpisodeCharacters.fulfilled, (state, action) => {
       state.episodeCharacters = action.payload;
       state.loader = false;

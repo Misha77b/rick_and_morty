@@ -3,18 +3,21 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
   singleCharacterData: {},
   characterOrigin: {},
-  loader: false
+  loader: false,
 };
 
 export const fetchSingleCharacter = createAsyncThunk(
   "singleCharacter/fetchData",
   async (id) => {
-    const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    const response = await fetch(
+      `https://rickandmortyapi.com/api/character/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .catch((err) => {
         console.warn(err);
