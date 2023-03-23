@@ -4,6 +4,7 @@ import singleCharacteReducer from "./reducers/singleCharacterSlice";
 import locationReducer from "./reducers/locationSlice";
 import singleLocationReducer from "./reducers/singleLocationSlice";
 import episodesReducer from "./reducers/episodesSlice";
+import singleEpisodeReducer from "./reducers/singleEpisodeSlice";
 
 const rootReducer = combineReducers({
   charactersReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   locationReducer,
   singleLocationReducer,
   episodesReducer,
+  singleEpisodeReducer,
 });
 
 export default rootReducer;

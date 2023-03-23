@@ -1,16 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-  locationInfo: {},
-  locationResidents: [],
+  episodeInfo: {},
+  episodeCharacters: [],
   loader: false,
 };
 
-export const fetchLocation = createAsyncThunk(
-  "location/fetchData",
+export const fetchEpisode = createAsyncThunk(
+  "episode/fetchData",
   async (id) => {
     const response = await fetch(
-      `https://rickandmortyapi.com/api/location/${id}`,
+      `https://rickandmortyapi.com/api/episode/${id}`,
       {
         method: "GET",
         headers: {
@@ -26,8 +26,8 @@ export const fetchLocation = createAsyncThunk(
   }
 );
 
-export const fetchLocationCharacters = createAsyncThunk(
-  "locationCharacters/fetchData",
+export const fetchEpisodeCharacters = createAsyncThunk(
+  "episodeCharacters/fetchData",
   async (characters) => {
     const response = await fetch(
       `https://rickandmortyapi.com/api/character/${characters}`,
@@ -46,32 +46,32 @@ export const fetchLocationCharacters = createAsyncThunk(
   }
 );
 
-export const singleLocationSlice = createSlice({
-  name: "singleLocation",
+export const singleEpisodeSlice = createSlice({
+  name: "singleEpisode",
   initialState,
   reducers: {
-    setLocationResidents: (state, action) => {
-      state.locationResidents = action.payload;
+    setEpisodeCharacters: (state, action) => {
+      state.episodeCharacters = action.payload;
       state.loader = false;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchLocation.pending, (state) => {
+    builder.addCase(fetchEpisode.pending, (state) => {
       state.loader = true;
     });
-    builder.addCase(fetchLocation.fulfilled, (state, action) => {
-      state.locationInfo = action.payload;
+    builder.addCase(fetchEpisode.fulfilled, (state, action) => {
+      state.episodeInfo = action.payload;
       //   state.loader = false;
     });
-    builder.addCase(fetchLocationCharacters.pending, (state) => {
+    builder.addCase(fetchEpisodeCharacters.pending, (state) => {
       //   state.loader = true;
     });
-    builder.addCase(fetchLocationCharacters.fulfilled, (state, action) => {
-      state.locationResidents = action.payload;
+    builder.addCase(fetchEpisodeCharacters.fulfilled, (state, action) => {
+      state.episodeCharacters = action.payload;
       state.loader = false;
     });
   },
 });
 
-export const { setLocationResidents } = singleLocationSlice.actions;
-export default singleLocationSlice.reducer;
+export const { setEpisodeCharacters } = singleEpisodeSlice.actions;
+export default singleEpisodeSlice.reducer;

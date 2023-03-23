@@ -1,6 +1,28 @@
+.episodes {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &__title {
+    margin: 20px auto 0;
+    font-size: 36px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.87);
+  }
+}
 
-//   max-width: 1020px;
-//   margin: 0 auto;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
+.episodesCards-container {
+  width: 100%;
+  margin-top: 30px;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 240px);
+  grid-auto-rows: auto;
+  grid-gap: 20px;
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(auto-fill, 310px);
+    grid-gap: 30px;
+  }
+}

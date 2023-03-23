@@ -55,13 +55,15 @@ const Locations = () => {
         <Loader />
       ) : (
         <div className="locations">
-          <div className="locations__title">Locations</div>
+          <span className="locations__title">Locations</span>
           <div className="locationCards-container">
             {locationsResults.map((item) => {
               return (
                 <LocationAndEpisodeCard
+                  page={"location"}
                   key={item.id}
                   id={item.id}
+                  image={"./assets/location.jpg"}
                   name={item.name}
                   type={item.type}
                 />

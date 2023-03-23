@@ -2,19 +2,22 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   episodesInfo: {},
-  episodesResults: [],
+  episodesResults: {},
   loader: false,
 };
 
 export const fetchEpisodes = createAsyncThunk(
-  "characters/fetchData",
-  async () => {
-    const response = await fetch(`https://rickandmortyapi.com/api/episode`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+  "episodes/fetchData",
+  async ({ params }) => {
+    const response = await fetch(
+      `https://rickandmortyapi.com/api/episode/?${params}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .catch((err) => {
         console.warn(err);
@@ -24,7 +27,7 @@ export const fetchEpisodes = createAsyncThunk(
 );
 
 export const episodesSlice = createSlice({
-  name: "locations",
+  name: "episodes",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

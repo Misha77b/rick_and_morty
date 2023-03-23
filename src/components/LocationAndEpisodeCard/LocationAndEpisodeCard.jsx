@@ -3,22 +3,26 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./LocationAndEpisodeCard.scss";
 
-const LocationAndEpisodeCard = ({ id, name, type }) => {
+const LocationAndEpisodeCard = ({ page, id, image, name, type }) => {
   return (
-    <Link to={`/location/${id}`}>
+    <Link to={`/${page}/${id}`}>
       <div className="LocationAndEpisode-card">
         <img
           className="LocationAndEpisode-card__img"
-          src="./assets/universe.jpg"
+          src={image}
           alt="location img"
         />
         <div className="LocationAndEpisode-card-text-content">
-          <h3 className="LocationAndEpisode-card-text-content__location">
-            Location {id}
+          <h3 className="LocationAndEpisode-card-text-content__page">
+            {page} {id}
           </h3>
-          <span className="LocationAndEpisode-card-text-content__title">{name}</span>
+          <span className="LocationAndEpisode-card-text-content__title">
+            {name}
+          </span>
           <br />
-          <span className="LocationAndEpisode-card-text-content__subtitle">{type}</span>
+          <span className="LocationAndEpisode-card-text-content__subtitle">
+            {type}
+          </span>
         </div>
       </div>
     </Link>
@@ -28,7 +32,9 @@ const LocationAndEpisodeCard = ({ id, name, type }) => {
 export default LocationAndEpisodeCard;
 
 LocationAndEpisodeCard.propTypes = {
+  page: PropTypes.string,
   id: PropTypes.number,
+  image: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string,
 };
